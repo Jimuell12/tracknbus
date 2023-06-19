@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Bus Management System</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-storage-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+	<link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+	<header>
+		<nav>
+			<div class="nav-wrapper darken-3">
+				<a href="#" class="brand-logo">TracknBus</a>
+				<a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class='bx bx-menu-alt-left'
+						style="font-size: 40px"></i></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="#dashboard" class="active" onclick="showDashboard()">Overview</a></li>
+					<li><a href="#attendance" onclick="showAttendance()">Attendance</a></li>
+					<li><a href="#add-student" onclick="showAddStudent()">Students' List</a></li>
+					<li><a href="#add-driver" onclick="showAddDriver()">Drivers' List</a></li>
+					<li><a href="#add-parent" onclick="showAddParent()">Parents' List</a></li>
+			</div>
+		</nav>
+
+		<ul class="sidenav" id="mobile-menu">
+			<li id="profile"><a href="#dashboard">
+					<img src="https://pbs.twimg.com/profile_images/378800000742136703/da1f702ea42d14a9179c49d3dfbf5b90_400x400.png"
+						class="profile-image">
+					<span>Admin</span>
+				</a></li>
+			<li><a href="#dashboard" onclick="showDashboard()">
+					<i class='bx bxs-dashboard icon'></i>
+					<span>Overview</span>
+				</a></li>
+			<li><a href="#attendance" onclick="showAttendance()">
+					<i class='bx bx-calendar-check icon'></i>
+					<span>Attendance</span>
+				</a></li>
+			<li><a href="#add-student" onclick="showAddStudent()">
+					<i class='bx bx-user-plus icon'></i>
+					<span>Students' List</span>
+				</a></li>
+			<li><a href="#add-driver" onclick="showAddDriver()">
+					<i class='bx bx-car icon'></i>
+					<span>Drivers' List</span>
+				</a></li>
+			<li><a href="#add-parent" onclick="showAddParent()">
+					<i class='bx bxs-user-account icon'></i>
+					<span>Parents' List</span>
+				</a></li>
+			<li style="position:absolute;bottom: 0;width: 100%;"><a href="index.html">
+					<i class='bx bx-caret-left-square icon'></i>
+					<span>Logout</span>
+				</a></li>
+		</ul>
+	</header>
+	<input type="text" id="searchInput" placeholder="Search" name="search">
+	<main id="main-content">
+		<section id="dashboard">
+			<div id="map"></div>
+		</section>
+		<section id="attendance">
+			<canvas id="attendance-chart"></canvas>
+			<div class="attendance-cards">
+				<div class="attendance-card" id="top-students-card">
+					<h1>Top 5 Students</h1>
+					<ul id="top-students-list"></ul>
+				</div>
+				<div class="attendance-card" id="donut-graph-card">
+					<h1>Attendance Percentage</h1>
+					<canvas id="donut-graph" width="300" height="300"></canvas>
+					<h2 id="percentage">0%</h2>
+				</div>
+				<div class="attendance-card" id="total-attendance-card">
+					<h1>Attendance Today</h1>
+					<p id="attendance-today">0</p>
+					<p>Present Today</p>
+				</div>
+			</div>
+
+		</section>
+
+		<section id="add-student">
+			<h2>Student's List</h2>
+			<div class="studentcard-container"></div>
+			<div class="overlay">
+				<div class="form-container">
+					<button class="close-button">×</button>
+					<h1>Enter Student's Details</h1>
+					<form>
+						<label for="name">Name:</label>
+						<input type="text" id="name" name="name">
+
+						<label for="email">Email:</label>
+						<input type="email" id="email" name="email">
+						<label for="password">Password:</label>
+						<input type="password" id="password" name="password">
+
+						<label for="bus-number">Bus Number:</label>
+						<select id="bus-number" name="bus-number" required>
+							<option value="0">--Select Bus--</option>
+							<option value="1">Bus 1</option>
+							<option value="2">Bus 2</option>
+							<option value="3">Bus 3</option>
+							<option value="4">Bus 4</option>
+							<option value="5">Bus 5</option>
+							<option value="6">Bus 6</option>
+							<option value="7">Bus 7</option>
+							<option value="8">Bus 8</option>
+							<option value="9">Bus 9</option>
+							<option value="10">Bus 10</option>
+							<option value="11">Bus 11</option>
+							<option value="12">Bus 12</option>
+							<option value="13">Bus 13</option>
+							<option value="14">Bus 14</option>
+							<option value="15">Bus 15</option>
+							<option value="16">Bus 16</option>
+							<option value="17">Bus 17</option>
+							<option value="18">Bus 18</option>
+							<option value="19">Bus 19</option>
+							<option value="20">Bus 20</option>
+
+						</select>
+
+						<label for="coordinate">Coordinate:</label>
+						<input type="text" id="coordinate" name="coordinate" onclick="openMap()">
+						<div id="mapstudent"></div>
+						<p id="error"></p>
+						<button type="submit" id="addstudent">Submit</button>
+					</form>
+				</div>
+			</div>
+		</section>
+		<section id="add-driver">
+			<h2>Driver's List</h2>
+			<div class="drivercard-container"></div>
+			<div class="overlay2">
+				<div class="form-container">
+					<button class="close-button2">×</button>
+					<h1>Enter Driver's Details</h1>
+					<form>
+						<label for="name">Name:</label>
+						<input type="text" id="driver-name" name="name" required>
+
+						<label for="license">License:</label>
+						<input type="text" id="driver-license" name="license" required>
+
+						<label for="email">Email:</label>
+						<input type="email" id="driver-email" name="email" required>
+						<label for="password">Password:</label>
+						<input type="password" id="driver-password" name="password" required>
+
+						<label for="driver-bus-number">Bus Number:</label>
+						<select id="driver-bus-number" name="driver-bus-number" required>
+							<option value="">--Select Bus--</option>
+							<option value="1">Bus 1</option>
+							<option value="2">Bus 2</option>
+							<option value="3">Bus 3</option>
+							<option value="4">Bus 4</option>
+							<option value="5">Bus 5</option>
+							<option value="6">Bus 6</option>
+							<option value="7">Bus 7</option>
+							<option value="8">Bus 8</option>
+							<option value="9">Bus 9</option>
+							<option value="10">Bus 10</option>
+							<option value="11">Bus 11</option>
+							<option value="12">Bus 12</option>
+							<option value="13">Bus 13</option>
+							<option value="14">Bus 14</option>
+							<option value="15">Bus 15</option>
+							<option value="16">Bus 16</option>
+							<option value="17">Bus 17</option>
+							<option value="18">Bus 18</option>
+							<option value="19">Bus 19</option>
+							<option value="20">Bus 20</option>
+
+						</select>
+						<p id="error1"></p>
+						<button type="submit" id="adddriver">Submit</button>
+					</form>
+				</div>
+			</div>
+		</section>
+		<section id="add-parent">
+			<h2>Parent's List</h2>
+			<div class="parentcard-container"></div>
+			<div class="overlay3">
+				<div class="form-container">
+					<button class="close-button3">×</button>
+					<h1>Enter Parent's Details</h1>
+					<form>
+						<label for="name">Name:</label>
+						<input type="text" id="parent-name" name="name" required>
+
+						<label for="email">Email:</label>
+						<input type="email" id="parent-email" name="email" required>
+
+						<label for="password">Password:</label>
+						<input type="password" id="parent-password" name="password" required>
+
+						<label for="child">Child:</label>
+						<select id="child" name="child" required>
+							<option value="">--Select child--</option>
+						</select>
+						<p id="error2"></p>
+						<button type="submit" id="addparent">Submit</button>
+					</form>
+				</div>
+			</div>
+		</section>
+
+
+	</main>
+	<script>
+		const closeButton = document.querySelector(".close-button");
+		const closeButton2 = document.querySelector(".close-button2");
+		const closeButton3 = document.querySelector(".close-button3");
+		const overlay = document.querySelector(".overlay");
+		const overlay2 = document.querySelector(".overlay2");
+		const overlay3 = document.querySelector(".overlay3");
+		// Add event listener to the close button to hide the form when clicked
+		closeButton.addEventListener("click", function () {
+			overlay.style.display = "none";
+			isEdit = false
+		});
+		closeButton2.addEventListener("click", function () {
+			overlay2.style.display = "none";
+			isEdit = false
+		});
+		closeButton3.addEventListener("click", function () {
+			overlay3.style.display = "none";
+			isEdit = false
+		});
+
+		function checkInputValue() {
+			var input = document.getElementById("driver-bus-number");
+			if (input.value > 20) {
+				input.value = 20;
+			} else if (input.value < 1) {
+				input.value = '';
+			}
+		}
+	</script>
+	<script src="js/admin.js"></script>
+</body>
+
+</html>

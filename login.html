@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-storage-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m8 offset-m2">
+				<h1 class="center-align">Login as <span id="role"></span></h1>
+				<div class="card">
+					<div class="card-content">
+						<form>
+							<div class="input-field">
+								<i class="bx bx-mail-send prefix"></i>
+								<input type="email" id="email" class="validate" required>
+								<label for="email">Email</label>
+								<span class="helper-text" data-error="Please enter a valid email address"></span>
+							</div>
+							<div class="input-field">
+								<i class="bx bx-lock-alt prefix"></i>
+								<input type="password" id="password" class="validate" required>
+								<label for="password">Password</label>
+								<span class="helper-text" data-error="Password is required"></span>
+							</div>
+							<div id="error-message" style="display: none;color: red;">Invalid Credentials. Please try
+								again.</div>
+							<div class="center-align">
+								<button class="login btn waves-effect waves-light blue darken-2" type="submit">
+									<i class='bx bx-log-in left'></i>Login
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="center-align">
+					<a href="index.html" class="waves-effect waves-light btn-flat white-text">
+						<i class='bx bx-arrow-back left' style="color: white;"></i>Back
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="js/login.js"></script>
+</body>
+
+</html>

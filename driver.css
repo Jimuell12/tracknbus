@@ -1,0 +1,378 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+html,
+body,
+#map {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.toggle {
+  position: absolute;
+  top: 7%;
+  right: 10px;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  display: block;
+  width: 50px;
+  height: 25px;
+  border-radius: 25px;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background-color: rgb(141, 137, 137);
+  transition: all 0.3s ease-in-out;
+}
+
+.toggle-input:checked+.toggle-label .toggle-slider {
+  transform: translateX(24px);
+  background-color: #007AFF;
+}
+
+.qr-button {
+  position: absolute;
+  top: 12%;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.warning {
+  position: absolute;
+  top: 20.5%;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.warning .bx {
+  font-size: 30px;
+}
+
+.qr-button i {
+  font-size: 24px;
+  color: #007AFF;
+}
+
+.mapboxgl-ctrl-geolocate {
+  z-index: -1;
+}
+
+
+#qr-code-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+#qr-code-overlay div {
+  background-color: #fff;
+  padding: 20px;
+}
+
+#qr-code-popup {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  display: none;
+}
+
+#sidebar-menu-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: left;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.menu-line {
+  width: 28px;
+  height: 3px;
+  background-color: rgb(0, 0, 0);
+  margin: 5px 0;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-line-top {
+  color: black;
+  width: 18px;
+  transform: skewX(-20deg);
+}
+
+.menu-line-middle {
+  width: 28px;
+  color: rgb(255, 0, 0);
+}
+
+.menu-line-bottom {
+  width: 38px;
+  transform: skewX(20deg);
+}
+
+#sidebar-menu-button.open .menu-line-top {
+  width: 28px;
+  transform: skewX(0deg) rotate(-45deg) translate(2px, -2px);
+}
+
+#sidebar-menu-button.open .menu-line-middle {
+  opacity: 0;
+}
+
+#sidebar-menu-button.open .menu-line-bottom {
+  width: 28px;
+  transform: skewX(0deg) rotate(45deg) translate(2px, 2px);
+}
+
+#sidebar-menu-button:focus {
+  outline: none;
+
+}
+
+#sidebar-menu-button:focus .menu-line {
+  background-color: #f5f5f5;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #1E1E2C;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+#sidebar.show {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #12121d;
+  color: #fff;
+}
+
+.sidebar-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu a {
+  color: rgb(255, 255, 255);
+  display: flex;
+  margin: 5px;
+  gap: 20%;
+  font-size: 18px;
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  background-color: #181825;
+}
+
+.sidebar-menu li {
+  margin-bottom: 8px;
+}
+.sidebar-menu a:hover {
+  background-color: #F5F5F5;
+  color: #333;
+}
+
+.sidebar-menu a.active {
+  background-color: #007AFF;
+  color: #FFF;
+}
+
+#sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #F34B1A;
+  align-items: center;
+}
+.profile img{
+  padding: 3%;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+#sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.marker {
+  width: 80px;
+  height: 80px;
+  background-color: #007AFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+.schoolmarker{
+  width: 80px;
+  height: 80px;
+  background-color: #F34B1A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.circle {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.circle, .schoolcircle {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  background-image: url('https://s3-ap-southeast-1.amazonaws.com/kalibrr-company-assets/logos_C657BDZCELN6DBDCEQAV-56418291.jpg');
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.label, .schoollabel {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.next-stop {
+  background-color: green !important;
+}
+
+.next-stop {
+  animation: blink 2s ease-out infinite;
+}
+
+.label {
+  animation: backwards;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.50;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

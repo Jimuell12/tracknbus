@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Choose Role</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css">
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m8 offset-m2">
+				<h1 class="center-align">OLOPSC</h1>
+				<div class="card">
+					<div class="card-content">
+						<div class="row">
+							<div class="col s12">
+								<button class="btn-large waves-effect waves-light green darken-2"
+									onclick="goToLogin('student')">
+									<i class='bx bx-user'></i>
+									<p>Student</p>
+								</button>
+							</div>
+							<div class="col s12">
+								<button class="btn-large waves-effect waves-light orange darken-2"
+									onclick="goToLogin('parent')">
+									<i class='bx bx-user-circle'></i>
+									<p>Parent</p>
+								</button>
+							</div>
+							<div class="col s12">
+								<button class="btn-large waves-effect waves-light blue darken-2"
+									onclick="goToLogin('driver')">
+									<i class='bx bx-car'></i>
+									<p>Driver</p>
+								</button>
+							</div>
+							<div class="col s12">
+								<button class="btn-large waves-effect waves-light purple darken-2"
+									onclick="goToLogin('teacher')">
+									<i class='bx bx-book-reader'></i>
+									<p>Teacher</p>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="js/index.js"></script>
+	<script src="cordova.js"></script>
+</body>
+
+</html>

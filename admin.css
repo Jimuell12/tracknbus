@@ -1,0 +1,519 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #333333;
+	background-image: url('https://cdn.discordapp.com/attachments/1082765023459418112/1093231403103166615/alle_background_for_students_management_system_minimal_flat_400c217a-abd6-4df4-8aa3-f28c90f2f8f6.png');
+	background-position: right;
+	height: 100vh;
+	background-repeat: no-repeat;
+	scrollbar-width: none;
+}
+
+/* Hide scrollbar in Chrome, Safari, and Edge */
+*::-webkit-scrollbar {
+	display: none;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #000000;
+}
+
+h1 {
+	font-size: 3rem;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+p {
+	font-size: 1.2rem;
+	margin-bottom: 20px;
+}
+
+@media (max-width : 992px) {
+	nav .brand-logo {
+		display: none;
+	}
+}
+
+/* Set the primary colors */
+nav {
+	background-color: #1E1E2C;
+	font-weight: 700;
+	position: fixed;
+	top: 0;
+	z-index: 10;
+}
+
+.active {
+	color: #F34B1A;
+}
+
+#main-content {
+	box-sizing: border-box;
+	overflow: auto;
+}
+
+#main-content h1,
+#main-content h2,
+#main-content h3,
+#main-content h4,
+#main-content h5,
+#main-content h6 {
+	margin: 20px 0;
+	font-weight: bold;
+}
+
+#main-content p {
+	margin: 20px 0;
+	line-height: 1.5;
+}
+
+#main-content ul,
+#main-content ol {
+	margin: 20px 0;
+	padding-left: 20px;
+}
+
+#main-content li {
+	margin: 10px 0;
+}
+
+#main-content img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 20px 0;
+	box-sizing: border-box;
+}
+
+#main-content hr {
+	background-color: #ddd;
+	border: none;
+	border-top: 1px solid #ddd;
+	margin: 20px 0;
+}
+
+.studentcard-container,
+.drivercard-container,
+.parentcard-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin-top: 40px;
+}
+
+.card {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.37), rgba(0, 0, 0, 0.589)), url('https://cdn.discordapp.com/attachments/1082765023459418112/1093231884202418247/alle_background_for_students_management_system_minimal_flat_1eb59cd0-7273-4bae-bd26-a396a4de9cf0.png');
+	background-size: cover;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	max-width: 400px;
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+	transition: all 0.2s ease-in-out;
+	flex-grow: 1;
+	/* added this property to ensure equal width */
+}
+
+.card:hover {
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+	transform: translateY(-5px);
+	cursor: pointer;
+}
+
+.card img {
+	min-width: 150px;
+	min-height: 150px;
+	max-width: 150px;
+	max-height: 150px;
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 50%;
+	margin-right: 20px;
+}
+
+#add-student,
+#add-driver,
+#add-parent {
+	color: rgb(31, 131, 161);
+	height: 100vh;
+}
+
+.card .details {
+	text-align: center;
+	color: rgb(173, 211, 230);
+}
+
+.card .details .actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.card .info {
+	color: #ffee00;
+}
+
+.card .info .bus-number,
+.card .info .ride {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.driver-bus-number {
+	color: rgb(8, 206, 8);
+	font-weight: 600;
+}
+
+
+#attendance,
+#add-student,
+#add-driver,
+#add-parent {
+	display: none;
+	margin: 10px;
+	padding-top: 80px;
+}
+
+#dashboard {
+	margin: 0;
+}
+
+.overlay,
+.overlay2,
+.overlay3 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-container {
+	max-height: 90%;
+	overflow: scroll;
+	position: relative;
+	background-color: white;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	width: 90%;
+	top: 5.5%;
+}
+
+.close-button,
+.close-button2,
+.close-button3 {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 5px;
+	background-color: transparent;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#searchInput {
+	color: rgb(255, 255, 255);
+	border-color: #ffffff;
+	font-weight: 600;
+	position: absolute;
+	top: 12%;
+	right: 10px;
+	padding: 5px;
+	width: 50%;
+	background-color: #36365fc5;
+	border-radius: 5px;
+}
+
+#searchInput::placeholder {
+	color: #ffffff9a;
+	border: #ffffff;
+}
+
+@media (max-width : 992px) {
+	#searchInput {
+		z-index: 10;
+		color: white;
+		font-weight: 600;
+		position: fixed;
+		top: 0;
+		right: 10px;
+		padding: 5px;
+		width: 50%;
+		background-color: #36365f94;
+	}
+}
+
+.form-container h2 {
+	margin-top: 0;
+}
+
+#mapstudent {
+	height: 100vh;
+}
+
+.mapboxgl-canvas {
+	height: 100%;
+	width: 100%;
+}
+
+#map {
+	height: 100vh;
+	margin: 0;
+}
+
+#addstudent,
+#adddriver,
+#addparent {
+	background-color: rgb(31, 131, 161);
+	border-radius: 8px;
+	border-style: none;
+	box-sizing: border-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	height: 40px;
+	line-height: 20px;
+	list-style: none;
+	margin: 0;
+	outline: none;
+	padding: 10px 16px;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	transition: color 100ms;
+	vertical-align: baseline;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+}
+
+
+#addstudent:hover,
+#addstudent:focus {
+	background-color: rgb(42, 167, 206);
+}
+
+.sidenav {
+	background-color: #1E1E2C;
+	color: #fff;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 250px;
+	overflow-x: hidden;
+	transition: 0.8s;
+	z-index: 1000;
+}
+
+.sidenav li {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.sidenav span {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+	font-size: 18px;
+	color: #fff;
+	display: block;
+}
+
+.sidenav a {
+	padding: 10px 8px 10px 16px;
+	text-decoration: none;
+	font-size: 18px;
+	color: #fff;
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav .icon {
+	font-size: 24px;
+	color: rgb(255, 255, 255);
+}
+
+.profile-image {
+	display: block;
+	margin: 0 auto;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+#profile {
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 120px;
+}
+
+#profile span {
+	font-weight: 700;
+	margin-bottom: 25px;
+	text-align: center;
+	font-size: 2rem;
+	color: #F34B1A;
+}
+
+#attendance {
+	height: 100vh;
+	overflow: scroll;
+}
+
+#attendance-chart {
+	background-color: #ffffff;
+	border-radius: 12px;
+	max-height: 40vh;
+}
+
+.attendance-cards {
+	display: flex;
+	flex-direction: wrap;
+	text-align: center;
+}
+
+.attendance-card {
+	flex: 1;
+	margin-right: 10px;
+	/* add some spacing between cards */
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border-radius: 12px;
+	background-color: rgb(252, 252, 252);
+}
+
+.attendance-card h1 {
+	font-size: 30px;
+	font-family: 'Roboto';
+	font-weight: 700;
+}
+
+@media (max-width: 767px) {
+
+	/* apply styles only for screens with max width of 767px, which is a common breakpoint for mobile devices */
+	.attendance-cards {
+		flex-direction: column;
+		/* change direction to column */
+	}
+
+	.attendance-card {
+		margin-right: 0;
+		/* remove right margin, so cards stack vertically without spacing */
+	}
+}
+
+#donut-graph {
+
+	padding: 5%;
+}
+
+#donut-graph-card {
+	position: relative;
+}
+
+#attendance-today {
+	font-size: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+#total-attendance-card #attendance-today {
+	font-size: 150px;
+}
+
+#percentage {
+	color: #FF6384;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	left: 0;
+	font-size: 40px;
+	text-align: center;
+
+}
+
+#attendance-dropdowns {
+	width: 100%;
+	height: 5%;
+	background-color: black;
+}
+
+.circle {
+	width: 70px;
+	height: 70px;
+	background-size: cover;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.8);
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 12px;
+}
+
+.marker {
+	width: 80px;
+	height: 80px;
+	background-color: #007AFF;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.driver {
+	background-color: #F34B1A;
+}
+
+select {
+	display: block;
+	width: 100%;
+	padding: 0.5rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	margin-bottom: 2%;
+}

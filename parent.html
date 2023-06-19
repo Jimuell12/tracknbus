@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>QR Attendance - Attendance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-messaging-compat.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+  <link rel="stylesheet" href="css/parent.css">
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div class="toggle">
+    <input type="checkbox" id="dark-mode-toggle" class="toggle-input">
+    <label for="dark-mode-toggle" class="toggle-label"></label>
+    <div class="toggle-slider"></div>
+  </div>
+
+  <button id="sidebar-menu-button">
+    <span class="menu-line menu-line-bottom"></span>
+    <span class="menu-line menu-line-middle"></span>
+    <span class="menu-line menu-line-top"></span>
+  </button>
+
+  <div id="sidebar">
+    <div class="sidebar-header">
+      <h1>TracknBus</h1>
+    </div>
+    <div class="profile">
+      <img id="profileimg" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="">
+      <h2 id="profilename">Jimuel Flojera</h2>
+    </div>
+    <ul class="sidebar-menu">
+      <li onclick="  sidebarMenuButton.classList.remove('open');sidebar.classList.remove('show');sidebarOverlay.style.display = 'none';"><a><i class='bx bxs-home'></i>Home</a></li>
+      <li><a href="https://www.facebook.com/flojerajimuel/"><i class='bx bx-info-circle' ></i>About</a></li>
+      <li><a href="settings.html?role=parents"><i class='bx bx-cog' ></i>Settings</a></li>
+      <li style="position:absolute;bottom: 0;width: 100%;"><a onclick="auth.signOut()"><i class='bx bx-caret-left-square'></i>Logout</a></li>
+    </ul>
+  </div>
+  <div id="sidebar-overlay"></div>
+  <script src="cordova.js"></script>
+  <script src="js/parent.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Mapbox App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+  <script
+    src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js'></script>
+  <link rel='stylesheet'
+    href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css'
+    type='text/css' />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
+  <link rel="stylesheet" href="css/driver.css">
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div class="toggle">
+    <input type="checkbox" id="dark-mode-toggle" class="toggle-input">
+    <label for="dark-mode-toggle" class="toggle-label"></label>
+    <div class="toggle-slider"></div>
+  </div>
+
+  <button id="qr-code-button" class="qr-button">
+    <i class='bx bx-qr' style="color: rgb(0, 0, 0);"></i>
+  </button>
+  <button id="warning-button" class="warning">
+    <i class='bx bx-alarm-exclamation'></i>
+  </button>
+
+  <div id="qr-code-overlay"></div>
+  <div id="qr-code-popup">
+    <div style="text-align: center;font-weight: 800;font-size: 40px;">Attendance</div>
+    <img id="qr-code-image" src="">
+  </div>
+
+  <button id="sidebar-menu-button">
+    <span class="menu-line menu-line-bottom"></span>
+    <span class="menu-line menu-line-middle"></span>
+    <span class="menu-line menu-line-top"></span>
+  </button>
+
+  <div id="sidebar">
+    <div class="sidebar-header">
+      <h1>TracknBus</h1>
+    </div>
+    <div class="profile">
+      <img id="profileimg" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+        alt="">
+      <h2 id="profilename">Jimuel Flojera</h2>
+    </div>
+    <ul class="sidebar-menu">
+      <li onclick="  sidebarMenuButton.classList.remove('open');sidebar.classList.remove('show');sidebarOverlay.style.display = 'none';"><a><i class='bx bxs-home'></i>Home</a></li>
+      <li><a href="https://www.facebook.com/flojerajimuel/"><i class='bx bx-info-circle'></i>About</a></li>
+      <li><a href="settings.html?role=drivers"><i class='bx bx-cog'></i>Settings</a></li>
+      <li style="position:absolute;bottom: 0;width: 100%;"><a onclick="auth.signOut()"><i
+            class='bx bx-caret-left-square'></i>Logout</a></li>
+    </ul>
+  </div>
+  <div id="sidebar-overlay"></div>
+  <script src="cordova.js"></script>
+  <script src="js/driver.js"></script>
+</body>
+
+</html>
